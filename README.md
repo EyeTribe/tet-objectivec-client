@@ -47,5 +47,14 @@ The complete API specification used by the Objective-C SDK to communicate with t
 
 Changelog
 ----
+
+0.9.49 (2014-12-10)
+
+- Fixed occational exception when disconnecting from the GazeAPI
+- Fixed GazeAPI hanging when connecting for the second time
+- Added support for listening to EyeTribe Server conneciton state (IConnectionStateListener)
+- Added missing calibration result notification to ICalibrationResultListener(s)
+
 0.9.36 (2014-07-17)
+
 - Initial release

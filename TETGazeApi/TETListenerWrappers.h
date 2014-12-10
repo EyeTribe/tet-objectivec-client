@@ -23,16 +23,18 @@ public:
     
     virtual void on_tracker_connection_changed(int tracker_state)
     {
+        id delegate = _delegate;
         dispatch_async(dispatch_get_main_queue(), ^{
-            [_delegate onTrackerConnectionChanged:tracker_state];
+            [delegate onTrackerConnectionChanged:tracker_state];
         });
     }
     
     virtual void on_screen_state_changed(gtl::Screen const & screen)
     {
+        id delegate = _delegate;
         gtl::Screen screenData = screen;
         dispatch_async(dispatch_get_main_queue(), ^{
-            [_delegate onScreenStateChanged:TETScreenFromCppScreen(screenData)];
+            [delegate onScreenStateChanged:TETScreenFromCppScreen(screenData)];
         });
     }
     
@@ -51,9 +53,10 @@ public:
     
     virtual void on_gaze_data(gtl::GazeData const & gaze_data)
     {
+        id delegate = _delegate;
         gtl::GazeData data = gaze_data;
         dispatch_async(dispatch_get_main_queue(), ^{
-            [_delegate onGazeData:TETGazeDataFromCppGazeData(data)];
+            [delegate onGazeData:TETGazeDataFromCppGazeData(data)];
         });
     }
     
@@ -72,8 +75,9 @@ public:
     
     virtual void on_calibration_changed(bool is_calibrated, gtl::CalibResult const & calib_result)
     {
+        id delegate = _delegate;
         dispatch_async(dispatch_get_main_queue(), ^{
-            [_delegate onCalibrationChanged:is_calibrated withResult:TETCalibResultFromCppCalibResult(calib_result)];
+            [delegate onCalibrationChanged:is_calibrated withResult:TETCalibResultFromCppCalibResult(calib_result)];
         });
     }
     
@@ -94,8 +98,9 @@ public:
     /** Called when a calibration process has been started. */
     virtual void on_calibration_started()
     {
+        id delegate = _delegate;
         dispatch_async(dispatch_get_main_queue(), ^{
-            [_delegate onCalibrationStarted];
+            [delegate onCalibrationStarted];
         });
     }
     
@@ -105,16 +110,18 @@ public:
      */
     virtual void on_calibration_progress(double progress)
     {
+        id delegate = _delegate;
         dispatch_async(dispatch_get_main_queue(), ^{
-            [_delegate onCalibrationProgress:progress];
+            [delegate onCalibrationProgress:progress];
         });
     }
     
     /** Called when all calibration points have been collected and calibration processing begins. */
     virtual void on_calibration_processing()
     {
+        id delegate = _delegate;
         dispatch_async(dispatch_get_main_queue(), ^{
-            [_delegate onCalibrationProcessing];
+            [delegate onCalibrationProcessing];
         });
     }
     /** Called when processing of calibration points and calibration as a whole has completed.
@@ -124,9 +131,10 @@ public:
      */
     virtual void on_calibration_result(bool is_calibrated, gtl::CalibResult const & calib_result)
     {
+        id delegate = _delegate;
         gtl::CalibResult result = calib_result;
         dispatch_async(dispatch_get_main_queue(), ^{
-            [_delegate onCalibrationCalibrated:is_calibrated withResult:TETCalibResultFromCppCalibResult(result)];
+            [delegate onCalibrationCalibrated:is_calibrated withResult:TETCalibResultFromCppCalibResult(result)];
         });
     }
     
@@ -136,4 +144,25 @@ private:
 };
 
 
+class ConnectionStateChangeListenerWrapper : public gtl::IConnectionStateListener
+{
+public:
+    ConnectionStateChangeListenerWrapper(id delegate)
+    {
+        _delegate = delegate;
+    }
+    
+    virtual void on_connection_state_changed( bool is_connected )
+    {
+        id delegate = _delegate;
+        dispatch_async(dispatch_get_main_queue(), ^{
+            [delegate onConnectionStateChanged:is_connected];
+        });
+    }
+private:
+    id _delegate;
+};
+
+
 #endif
+

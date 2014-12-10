@@ -23,7 +23,7 @@ namespace gtl
         GAC_CALIBRATION,
         GAC_HEARTBEAT
     };
-    
+
     enum GazeApiRequest
     {
         GAR_UNKNOWN,
@@ -33,9 +33,9 @@ namespace gtl
         GAR_ABORT,
         GAR_CLEAR,
         GAR_POINTSTART,
-        GAR_POINTEND
+        GAR_POINTEND,
     };
-    
+
     enum GazeApiStatusCode
     {
         GASC_UNKNOWN,
@@ -45,13 +45,13 @@ namespace gtl
         GASC_DISPLAY_CHANGE,
         GASC_TRACKER_STATE_CHANGE
     };
-    
+
     struct Point2D
     {
         float x;    ///< x coordinate
         float y;    ///< y coordinate
     };
-    
+
     struct Eye
     {
         Point2D raw; ///< raw gaze coordinates in pixels
@@ -59,18 +59,18 @@ namespace gtl
         float psize;  ///<pupil size
         Point2D pcenter; ///< pupil coordinates normalized
     };
-    
+
     struct GazeData
     {
         enum
         {
-            GD_STATE_TRACKING_GAZE        = 1 << 0,
-            GD_STATE_TRACKING_EYES        = 1 << 1,
-            GD_STATE_TRACKING_PRESENCE    = 1 << 2,
-            GD_STATE_TRACKING_FAIL        = 1 << 3,
-            GD_STATE_TRACKING_LOST        = 1 << 4
+            GD_STATE_TRACKING_GAZE      = 1 << 0,
+            GD_STATE_TRACKING_EYES      = 1 << 1,
+            GD_STATE_TRACKING_PRESENCE  = 1 << 2,
+            GD_STATE_TRACKING_FAIL      = 1 << 3,
+            GD_STATE_TRACKING_LOST      = 1 << 4
         };
-        
+
         int time; ///< timestamp
         bool fix; ///< is fixated?
         int state; ///< 32bit masked state integer
@@ -78,33 +78,33 @@ namespace gtl
         Point2D avg; ///< smoothed coordinates in pix
         Eye lefteye; ///< data for left eye
         Eye righteye; ///< data for right eye
-        
-        bool operator == (GazeData const & rhs) const
+
+        bool operator == ( GazeData const & rhs ) const
         {
-            return 0 == memcmp(this, &rhs, sizeof(GazeData));
+            return 0 == memcmp( this, &rhs, sizeof( GazeData ) );
         }
-        
-        bool operator != (GazeData const & rhs) const
+
+        bool operator != ( GazeData const & rhs ) const
         {
-            return 0 != memcmp(this, &rhs, sizeof(GazeData));
+            return 0 != memcmp( this, &rhs, sizeof( GazeData ) );
         }
     };
-    
+
     struct CalibPoint
     {
         int state; ///< state of calibration point
         Point2D cp; ///< coordinates in pixels
         Point2D mecp; ///< mean estimated coords in pixels
         struct { float ad; float adl; float adr; } acd; ///< accuracy in degrees
-        struct { float mep; float mepl; float mepr; } mepix ; ///< mean error in pixels
+        struct { float mep; float mepl; float mepr; } mepix; ///< mean error in pixels
         struct { float asd; float asdl; float asdr; } asdp; ///< average std deviation in
-        
-        bool operator == (CalibPoint const & rhs) const
+
+        bool operator == ( CalibPoint const & rhs ) const
         {
-            return 0 == memcmp(this, &rhs, sizeof(CalibPoint));
+            return 0 == memcmp( this, &rhs, sizeof( CalibPoint ) );
         }
     };
-    
+
     struct CalibResult
     {
         bool result; ///< was the calibration successful?
@@ -112,25 +112,25 @@ namespace gtl
         float degl; ///< average error in degs, left eye
         float degr;  ///< average error in degs, right eye
         std::vector<CalibPoint> calibpoints;
-        
-        bool operator == (CalibResult const & rhs) const
+
+        bool operator == ( CalibResult const & rhs ) const
         {
             return result == rhs.result &&
-            deg == rhs.deg &&
-            degl == rhs.degl &&
-            degr == rhs.degr &&
-            calibpoints == rhs.calibpoints;
+                deg == rhs.deg &&
+                degl == rhs.degl &&
+                degr == rhs.degr &&
+                calibpoints == rhs.calibpoints;
         }
-        
-        bool operator != (CalibResult const & rhs) const
+
+        bool operator != ( CalibResult const & rhs ) const
         {
             return result != rhs.result ||
-            deg != rhs.deg ||
-            degl != rhs.degl ||
-            degr != rhs.degr ||
-            calibpoints != rhs.calibpoints;
+                deg != rhs.deg ||
+                degl != rhs.degl ||
+                degr != rhs.degr ||
+                calibpoints != rhs.calibpoints;
         }
-        
+
         void clear()
         {
             result = false;
@@ -140,7 +140,7 @@ namespace gtl
             calibpoints.clear();
         }
     };
-    
+
     struct Screen
     {
         int screenindex;    ///< Screen index
@@ -148,8 +148,8 @@ namespace gtl
         int screenresh;     ///< Screen resolution height in pixels
         float screenpsyw;   ///< Screen physical width in meters
         float screenpsyh;   ///< Screen physical height in meters
-        
-        void set(int index, int resw, int resh, float psyw, float psyh)
+
+        void set( int index, int resw, int resh, float psyw, float psyh )
         {
             screenindex = index;
             screenresw = resw;
@@ -157,18 +157,18 @@ namespace gtl
             screenpsyw = psyw;
             screenpsyh = psyh;
         }
-        
-        bool operator == (Screen const & rhs) const
+
+        bool operator == ( Screen const & rhs ) const
         {
-            return 0 == memcmp(this, &rhs, sizeof(Screen));
+            return 0 == memcmp( this, &rhs, sizeof( Screen ) );
         }
-        
-        bool operator != (Screen const & rhs) const
+
+        bool operator != ( Screen const & rhs ) const
         {
-            return 0 != memcmp(this, &rhs, sizeof(Screen));
+            return 0 != memcmp( this, &rhs, sizeof( Screen ) );
         }
     };
-    
+
     struct ServerState
     {
         enum
@@ -179,7 +179,7 @@ namespace gtl
             TRACKER_CONNECTED_NOUSB3 = 3,
             TRACKER_CONNECTED_NOSTREAM = 4
         };
-        
+
         bool push;
         int heartbeatinterval;
         int version;

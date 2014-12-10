@@ -26,9 +26,9 @@ namespace boost
 {
     namespace asio
     {
-        template <> struct is_match_condition<gtl::JSONPackageMatcher>
-        : public true_type
-        {};
+        template <> struct is_match_condition < gtl::JSONPackageMatcher >
+            : public true_type
+            {};
     }
 };
 
@@ -38,63 +38,64 @@ namespace gtl
     {
     public:
         JSONPackageMatcher();
-        
+
         template <typename Iterator>
-        std::pair<Iterator, bool> operator()(Iterator begin, Iterator end)
+        std::pair<Iterator, bool> operator()( Iterator begin, Iterator end )
         {
             Iterator i = begin;
-            
-            while (i != end)
+
+            while( i != end )
             {
                 bool const left = *i == '{';
                 bool const right = *i == '}';
                 m_stack += left ? 1 : right ? -1 : 0;
                 m_in_message |= left;
-                
+
                 ++i; // We need to make sure that '}' is consumed before returning
-                
-                if (m_stack == 0 && m_in_message)
+
+                if( m_stack == 0 && m_in_message )
                 {
-                    while (i != end && *i != '{')
+                    while( i != end && *i != '{' )
                     {
                         ++i; // read all post-amble until next message starts (\r, \n, etc.)
                     }
-                    
+
                     m_in_message = false;
-                    return std::make_pair(i, true);
+                    return std::make_pair( i, true );
                 }
             }
-            return std::make_pair(i, false);
+            return std::make_pair( i, false );
         }
-        
+
     private:
         bool    m_in_message;
         size_t  m_stack;
     };
-    
+
     // Call backs from socket
     class ISocketListener
     {
     public:
         virtual ~ISocketListener() {}
-        virtual void on_message(std::string const & message) = 0;
+        virtual void on_message( std::string const & message ) = 0;
         virtual void on_disconnected() = 0;
     };
-    
-    class Socket : public Observable<ISocketListener>
+
+    class Socket : public Observable < ISocketListener >
     {
     public:
-        Socket(bool verbose = false);
+        Socket( bool verbose = false );
         ~Socket();
-        
-        bool connect(std::string const & address, std::string const & port);
+
+        bool connect( std::string const & address, std::string const & port );
         void disconnect();
-        bool send(std::string const & message);
-        
+        bool handle_connection_state();
+        bool send( std::string const & message );
+
     private:
-        void on_read(const boost::system::error_code& error, size_t bytes_transferred);
-        void on_write(const boost::system::error_code& error, char* data);
-        
+        void on_read( const boost::system::error_code& error, size_t bytes_transferred );
+        void on_write( const boost::system::error_code& error, char* data );
+
     private:
         JSONPackageMatcher              m_matcher;
         boost::asio::streambuf          m_buffer;

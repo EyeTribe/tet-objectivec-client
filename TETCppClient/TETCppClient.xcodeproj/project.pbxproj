@@ -30,6 +30,7 @@
 		248661CE19123D00004194B0 /* gazeapi_types.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = gazeapi_types.h; sourceTree = SOURCE_ROOT; };
 		248661CF19123D00004194B0 /* gazeapi.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = gazeapi.cpp; sourceTree = SOURCE_ROOT; };
 		248661D019123D00004194B0 /* gazeapi.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = gazeapi.h; sourceTree = SOURCE_ROOT; };
+		248661D119123D00004194B0 /* readme.txt */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = readme.txt; sourceTree = SOURCE_ROOT; };
 		248661D219123D00004194B0 /* TETCppClient-Prefix.pch */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "TETCppClient-Prefix.pch"; sourceTree = SOURCE_ROOT; };
 		248661D319123D00004194B0 /* TETCppClient.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; path = TETCppClient.xcodeproj; sourceTree = SOURCE_ROOT; };
 		24D801081910DB3A00B1B579 /* libTETCppClient.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = libTETCppClient.a; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -107,6 +108,7 @@
 				248661CE19123D00004194B0 /* gazeapi_types.h */,
 				248661CF19123D00004194B0 /* gazeapi.cpp */,
 				248661D019123D00004194B0 /* gazeapi.h */,
+				248661D119123D00004194B0 /* readme.txt */,
 				248661D219123D00004194B0 /* TETCppClient-Prefix.pch */,
 				248661D319123D00004194B0 /* TETCppClient.xcodeproj */,
 				24D801121910DB3A00B1B579 /* Supporting Files */,

@@ -19,6 +19,7 @@
 @property (nonatomic) CalibrationResultListenerWrapper* calibrationResultListenerWrapper;
 @property (nonatomic) CalibrationProcessHandlerWrapper* calibrationProcessHandler;
 @property (nonatomic) TrackerStateListenerWrapper* trackerStateListener;
+@property (nonatomic) ConnectionStateChangeListenerWrapper* connectionStateListener;
 @property (nonatomic) GazeListenerWrapper* gazeListenerWrapper;
 -(void)setObject:(id)object;
 -(id)object;
@@ -100,13 +101,17 @@
         api->add_listener(*tetlistener.trackerStateListener);
     }
     
+    // add tracker state listener
+    if([listener conformsToProtocol:@protocol(TETConnectionStateListener)]) {
+        tetlistener.connectionStateListener = new ConnectionStateChangeListenerWrapper(listener);
+        api->add_listener(*tetlistener.connectionStateListener);
+    }
     
     // add gaze listener
     if([listener conformsToProtocol:@protocol(TETGazeListener)]) {
         tetlistener.gazeListenerWrapper = new GazeListenerWrapper(listener);
         api->add_listener(*tetlistener.gazeListenerWrapper);
     }
-    
 }
 
 -(void)removeListener:(id)listener
@@ -140,7 +145,8 @@
 
 -(BOOL)connectWithPushMode:(BOOL)pushMode hostname:(NSString*)hostname andPort:(int)port
 {
-    return api->connect(pushMode, [hostname UTF8String], port);
+//    return api->connect(pushMode, [hostname UTF8String], port);
+    return api->connect(pushMode, port);    
 }
 
 

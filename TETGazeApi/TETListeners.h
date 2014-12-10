@@ -115,4 +115,18 @@
 @end
 
 
+/** TETConnectionStateListener
+  A notification callback indicating that the connection state has changed.
+  Use this to detect if connection the EyeTribe Server has been lost.
+  Implementing classes should update themselves accordingly if needed. 
+ */
+@protocol TETConnectionStateListener <NSObject>
+@required
+
+/** Called when tracker received or looses connection  */
+-(void)onConnectionStateChanged:(BOOL)isConnected;
+@end
+
+
+
 #endif
