@@ -27,43 +27,34 @@
  */
 -(void)removeListener:(id)listener;
 
-/** Connect to the server via default port.
- @param pushMode
-        Connect using push mode? otherwice pull mode is activated.
- @return True if connected, false if connection failed.
+/** Has a connection to the server been established?
+ @return True if connected, false if not.
  */
 -(BOOL)isConnected;
 
 /** Connect to the server via default port.
- @param pushMode
-        Connect using push mode? otherwice pull mode is activated.
  @return True if connected, false if connection failed.
  */
--(BOOL)connectWithPushMode:(BOOL)pushMode;
+-(BOOL)connect;
 
 /** Connect to the server via specified port.
- @param pushMode
-        Connect using push mode? otherwice pull mode is activated.
+ @param hostname
+        Default host is localhost'.
  @param port 
         Number to connect to server on.
  @return True if connected, false if connection failed.
  */
--(BOOL)connectWithPushMode:(BOOL)pushMode hostname:(NSString*)hostname andPort:(int)port;
+-(BOOL)connectWithPort:(int)port;
 
 /** Disconnect from server. */
 -(void)disconnect;
 
-/** Enable/disable server push of GazeData via call backs from IGazeListener interface.
- @param enable 
-        True if enable, false if disable.
- */
--(void)setPush:(BOOL)enable;
-
 /** Set screen parameters.
  @param screen
         the Screen parameters to be set.
+ @return True if successful and the screen parameters are valid, false if not.
  */
--(void)setScreen:(TETScreen*)screen;
+-(BOOL)setScreen:(TETScreen*)screen;
 
 /** Get current used screen parameters.
  @param screen

@@ -76,8 +76,6 @@ TETCalibResult* TETCalibResultFromCppCalibResult(gtl::CalibResult const& cppResu
 TETServerState* TETServerStateFromCppServerState(gtl::ServerState const & cppServerState)
 {
     TETServerState* serverState = [[TETServerState alloc] init];
-    serverState.push = cppServerState.push;
-    serverState.heartbeatinterval = cppServerState.heartbeatinterval;
     serverState.version = cppServerState.version;
     serverState.trackerstate = cppServerState.trackerstate;
     serverState.framerate = cppServerState.framerate;

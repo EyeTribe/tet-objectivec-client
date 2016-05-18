@@ -61,7 +61,7 @@
 {
     self = [super init];
     if(self != nil) {
-        api = new gtl::GazeApi(false);
+        api = new gtl::GazeApi(0);
         listeners = [[NSMutableArray alloc] init];
     }
     return self;
@@ -138,29 +138,23 @@
     return api->is_connected();
 }
 
--(BOOL)connectWithPushMode:(BOOL)pushMode
+-(BOOL)connect
 {
-    return api->connect(pushMode);
+    return api->connect();
 }
 
--(BOOL)connectWithPushMode:(BOOL)pushMode hostname:(NSString*)hostname andPort:(int)port
+-(BOOL)connectWithPort:(int)port
 {
-//    return api->connect(pushMode, [hostname UTF8String], port);
-    return api->connect(pushMode, port);    
+//    return api->connect([hostname UTF8String], port);
+    return api->connect(port);
 }
-
 
 -(void)disconnect
 {
     api->disconnect();
 }
 
--(void)setPush:(BOOL)enable
-{
-    api->set_push(enable);
-}
-
--(void)setScreen:(TETScreen*)screen
+-(BOOL)setScreen:(TETScreen*)screen
 {
     gtl::Screen cppScreen;
     cppScreen.screenindex = screen.screenindex;
@@ -168,7 +162,7 @@
     cppScreen.screenresh = screen.screenresh;
     cppScreen.screenpsyw = screen.screenpsyw;
     cppScreen.screenpsyh = screen.screenpsyh;
-    api->set_screen(cppScreen);
+    return api->set_screen(cppScreen);
 }
 
 -(TETScreen*)screen
