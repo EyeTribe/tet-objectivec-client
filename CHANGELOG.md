@@ -1,7 +1,7 @@
 # Change Log #
 ---
 
-0.9.77 (2016-05-8)
+0.9.77 (2016-05-18)
 ---
 - Removed heartbeats as the server no longer requires them
 - Removed connection pull mode as the server natively only support push mode
