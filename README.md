@@ -1,17 +1,19 @@
-Objective-C SDK for The Eye Tribe Tracker
+![The Eye Tribe](tet_logo.png)
+
+Objective-C SDK for the EyeTribe Dev Kit
 ====
 
 Introduction
 ----
 
-This is the Objective-C reference implementation for The Eye Tribe Tracker and provides a simple Objective-C interface for communicating with the server through the open [TET API](http://dev.theeyetribe.com/api/). This allows developers to easily get started and focus their energy on creating innovative and immersive apps using our eye tracking technology. 
+This is the Objective-C library implementation for the EyeTribe Dev Kit. This reference implementation provides a Objective-C interface for communicating with the EyeTribe Server through the open EyeTribe API. The library allow developers to get started quickly and focus their efforts on creating truly immersive and innovative apps using our eye tracking technology.
 
 This implementation is simple of nature and wraps the [C++ SDK](https://github.com/EyeTribe/tet-cpp-client)
 
-This version is to be considered _alpha_. Feedback and bug fix submissions are welcome.
 
-Please visit http://dev.theeyetribe.com for more information.
-
+Documentation
+----
+The EyeTribe API reference is found at [Eye Tribe Developer Website](http://dev.theeyetribe.com/api/).
 
 Compilation
 ----
@@ -33,28 +35,15 @@ First, install Boost as explained in the [C++ SDK](https://github.com/EyeTribe/t
 Next, simply open the workspace file in Xcode and build the TETGazeApi scheme.
 
 
-Samples
+Getting Help
 ----
 
-There are currently no samples available for the Objective-C SDK, but they will be added as they become available.
+- **Have questions or need support?** Visit our [developer forum](http://theeyetribe.com/forum/), to find answers to your questions and share your experiences with others developers.
+- **Have a bug to report?** Open a [new issue](https://github.com/EyeTribe/tet-charp-client/issues) and tell us what you are experiencing. Please add library version and full log if possible.
+- **Have a feature request?** Either open a [new issue](https://github.com/EyeTribe/tet-csharp-client/issues) or post in our [developer forum](http://theeyetribe.com/forum/). Tell us what feature you are missing and what it should do. 
 
-
-API Reference
+Feedback
 ----
 
-The complete API specification used by the Objective-C SDK to communicate with the server is available on our [developer website](http://dev.theeyetribe.com/api/).
+If you like using this library, please consider sending out a tweet mentioning [@TheEyeTribe](twitter.com/theeyetribe), announce your app in our [developer forum](http://theeyetribe.com/forum/), or email [support@theeyetribe.com](mailto:support@theeyetribe.com) to let us know.
 
-
-Changelog
-----
-
-0.9.49 (2014-12-10)
-
-- Fixed occational exception when disconnecting from the GazeAPI
-- Fixed GazeAPI hanging when connecting for the second time
-- Added support for listening to EyeTribe Server conneciton state (IConnectionStateListener)
-- Added missing calibration result notification to ICalibrationResultListener(s)
-
-0.9.36 (2014-07-17)
-
-- Initial release

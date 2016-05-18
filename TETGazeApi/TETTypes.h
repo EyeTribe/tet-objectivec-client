@@ -66,9 +66,9 @@ typedef struct {
 
 @interface TETCalibPoint : NSObject
 enum {
-    TETCalibrationStateNoData,
-    TETCalibrationStateResample,
-    TETCalibrationStateOk
+    TETCalibrationStateNoData       = 0,
+    TETCalibrationStateResample     = 1,
+    TETCalibrationStateOk           = 2,
 };
 @property (nonatomic, assign) int state; ///< state of calibration point
 @property (nonatomic, assign) CGPoint cp; ///< coordinates in pixels
@@ -112,15 +112,13 @@ enum {
 @interface TETServerState : NSObject
 enum
 {
-    TETServerStateTrackerConnected = 0,
-    TETServerStateTrackerNotConnected = 1,
-    TETServerStateTrackerBadFW = 2,
-    TETServerStateTrackerNoUSB3 = 3,
-    TETServerStateTrackerNoStream = 4
+    TETServerStateTrackerConnected      = 0,
+    TETServerStateTrackerNotConnected   = 1,
+    TETServerStateTrackerBadFW          = 2,
+    TETServerStateTrackerNoUSB3         = 3,
+    TETServerStateTrackerNoStream       = 4,
 };
 
-@property (nonatomic, assign) bool push;
-@property (nonatomic, assign) int heartbeatinterval;
 @property (nonatomic, assign) int version;
 @property (nonatomic, assign) int trackerstate;
 @property (nonatomic, assign) int framerate;
